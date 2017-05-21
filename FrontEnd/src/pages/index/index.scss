@@ -1,0 +1,50 @@
+.slider{
+    padding-top: 10px;
+    .slider-pic{
+        width: 100%;
+        height: 100%;
+        img{
+            width: 100%;
+            height: 100%; 
+        }
+    }
+    .user-box{
+        padding: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+        .ivu-tabs-nav{
+            box-sizing: border-box;
+            width: 100%;
+            .ivu-tabs-tab{
+            text-align: center;
+            margin: 0; 
+            width: 50%;
+            }
+        }
+        .ivu-tabs-content{
+            .ivu-form{
+                box-sizing: border-box;
+                padding: 10px;
+                 .ivu-btn{
+                     width: 100%;
+                 }
+            }
+           
+        }
+        .tag-box{
+            .star{
+                float: right;
+                color: #ffac2d;
+            }
+            ul>li{
+                height: 29px;
+            }
+        }
+        
+    }
+    
+    .ivu-form-item{
+        width: 100%;
+    }
+}
+
