@@ -7,7 +7,7 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';    // 使用 CSS
 Vue.use(iView);
 Vue.config.productionTip = false
-
+Vue.use(require('vue-wechat-title'));
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
