@@ -7,7 +7,7 @@
                v-model="keys"
                @click.native.stop
                @keydown.native.enter="soTar('URL01')"
-               @keyup.native="soCur">
+               @keyup.native="soCur('URL01')">
                
         </Input>
         <div class="results">

@@ -1,10 +1,21 @@
-import base from '../base'
+import BaseService from '../base'
 
 /***********************************************
- * 1 => 百度搜索(默认)
- * 2 =>  
+ * URL01 => 百度搜索(默认)
+ * URL02 => Google
+ * URL03 => 360
+ * URL04 => GitHub
+ * URL05 => 知乎
+ * URL06 => segmentfault
+ * URL07 => CSDN
+ * URL08 => w3cschool
+ * URL09 => MDN
+ * URL10 => 简书
  ************************************************/
-const API01 = 'http://suggestion.baidu.com/';
+const searchURL = {
+    URL01: 'http://suggestion.baidu.com/', //百度
+}
+
 //针对 百度等callback
 function callback(d) {
     if (d.s) return d.s
@@ -16,28 +27,18 @@ function callback(d) {
 };
 
 export default {
-  getSearchData(type, cb, data) {
-    let url = '';
-    switch (type) {
-      case 1:
-        url = API01
-        break;
-      case 2:
-        url = API01
-        break;
-    }
-    let params = {
-        ...data,
-        cb:'callback'
-    }
-
-    base.getData(url, params, (res) => {
-        if(res.status == 200){            
-            cb(eval(res.data));
-        } else {
-            console.error(res);
+    getSearchData(type, cb, data) {
+        let params = {
+            ...data,
+            cb: 'callback' //百度jsonp 回调为cb
         }
-        
-    })
-  },
+        BaseService.getData(searchURL[type], params).then((res) => {
+            cb(eval(res.data || res));
+        }).catch((error) => {
+            console.log('数据请求失败啦');
+            throw new Error(error);
+        })
+
+
+    }
 }
