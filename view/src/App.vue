@@ -67,7 +67,7 @@
         <!--底部版权-->
 
         <div class="layout-copy ">
-            2011-2017 &copy; 网无忧科技有限公司
+            2011-2017 &copy; Front Sir 技术支持
         </div>
         <!--返回顶部-->
         <Back-top></Back-top>
