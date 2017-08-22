@@ -94,23 +94,23 @@ export default {
             curDateType: 'day',
             curHotLang: 'JavaScript',
             HotSiteLists: [{
-                    value: 'site01',
+                    value: 'github',
                     label: 'GitHub'
                 }, {
-                    value: 'site02',
+                    value: 'qianduan',
                     label: '前端外刊评论'
                 }, {
-                    value: 'site03',
+                    value: 'cnblogs',
                     label: '博客园'
                 }, {
-                    value: 'site04',
+                    value: 'csdn',
                     label: 'CSDN博客'
                 }, {
-                    value: 'site05',
+                    value: 'ithome',
                     label: 'IT之家'
                 },
                 {
-                    value: 'site06',
+                    value: 'solidot',
                     label: '奇客'
                 }
             ],
@@ -186,8 +186,9 @@ export default {
             }
             this.randomMovieList = getArrayItems(this.movieList, 6);
         },
-        getHotData() {
+        getHotData(type) {
             let pramas = {
+                "type": type,
                 "category": this.curHotType,
                 "period": this.curDateType,
                 "lang": this.curHotLang,
@@ -201,17 +202,17 @@ export default {
             }, pramas)
         },
         getOtherHot(type) {
-            if (type == 'site01') {
+            if (type == 'github') {
                 this.layoutType = 0;
-                this.getHotData();
+                this.getHotData(type);
             } else {
                 this.layoutType = 1;
             }
-            HttpHot.getOtherHot(type, res => {
+            HttpHot.getOtherHot(res => {
                 if (res.code == 200) {
                     this.hotLists = res.data;
                 }
-            })
+            }, { type })
         },
         //box顶部随机颜色
         BTColor() {

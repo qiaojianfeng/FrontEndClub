@@ -96,7 +96,7 @@
                         v-show="!layoutType">
                     <Option v-for="item in HotTypeLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData(item.value)"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>
@@ -105,7 +105,7 @@
                         v-show="!layoutType">
                     <Option v-for="item in DateTypeLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData(item.value)"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>
@@ -114,7 +114,7 @@
                         v-show="!layoutType">
                     <Option v-for="item in HotLangLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData(item.value)"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>

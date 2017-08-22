@@ -13,27 +13,14 @@ import BaseService from '../base'
  * URL10 => 简书
  ************************************************/
 const searchURL = {
-    URL01: 'http://suggestion.baidu.com/', //百度
+    URL01: '/api/hotKeys', //百度
 }
 
-//针对 百度等callback
-function callback(d) {
-    if (d.s) return d.s
-    else {
-        return d.result.map(function(item) {
-            return item[0]
-        });
-    }
-};
 
 export default {
-    getSearchData(type, cb, data) {
-        let params = {
-            ...data,
-            cb: 'callback' //百度jsonp 回调为cb
-        }
+    getSearchData(type, cb, params) {
         BaseService.getData(searchURL[type], params).then((res) => {
-            cb(eval(res.data || res));
+            cb(res.data || res)
         }).catch((error) => {
             console.log('数据请求失败啦');
             throw new Error(error);
