@@ -4,6 +4,7 @@ export default {
     data() {
         return {
             layoutType: 0,
+            spinShow: true,
             value3: 0,
             setting: {
                 height: '300px',
@@ -89,7 +90,7 @@ export default {
             ],
             randomMovieList: [],
             hotLists: [],
-            curHotSite: 'site01',
+            curHotSite: 'github',
             curHotType: 'trending',
             curDateType: 'day',
             curHotLang: 'JavaScript',
@@ -154,7 +155,7 @@ export default {
     },
     mounted() {
         this.changeLimit();
-        this.getHotData();
+        this.getHotData('github');
     },
     methods: {
         handleSubmit(name) {
@@ -187,6 +188,7 @@ export default {
             this.randomMovieList = getArrayItems(this.movieList, 6);
         },
         getHotData(type) {
+            this.spinShow = true;
             let pramas = {
                 "type": type,
                 "category": this.curHotType,
@@ -196,8 +198,11 @@ export default {
                 "limit": 30
             }
             HttpHot.getHotData(res => {
-                if (res.code == 200) {
+                if (res.status) {
                     this.hotLists = res.data;
+                    this.spinShow = false;
+                } else {
+                    this.$Message.error('对方不想说话，并且向你抛出了一个异常');
                 }
             }, pramas)
         },
@@ -206,13 +211,16 @@ export default {
                 this.layoutType = 0;
                 this.getHotData(type);
             } else {
-                this.layoutType = 1;
+                HttpHot.getHotData(res => {
+                    if (res.status) {
+                        this.hotLists = res.data;
+                        this.layoutType = 1;
+                    } else {
+                        this.$Message.error('对方不想说话，并且向你抛出了一个异常');
+                    }
+                }, { type })
             }
-            HttpHot.getOtherHot(res => {
-                if (res.code == 200) {
-                    this.hotLists = res.data;
-                }
-            }, { type })
+
         },
         //box顶部随机颜色
         BTColor() {
@@ -220,7 +228,7 @@ export default {
             var c2 = parseInt(Math.random() * 255);
             var c3 = parseInt(Math.random() * 255);
             return 'rgb(' + c1 + ',' + c2 + ',' + c3 + ')';
-        },
+        }
 
     },
     computed: {

@@ -1,9 +1,7 @@
 <template>
-    <div class="container">
-       
-     
-    
-    
+    <div class="container docs">
+         
+        
     </div>
 
 </template>

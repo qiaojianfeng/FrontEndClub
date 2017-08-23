@@ -28,6 +28,7 @@ function callback(d) {
  */
 function homeSearchBaidu(fn, params) {
     let type = params.type || 'URL01';
+
     superagent.get(searchURL[type])
         .query({
             wd: params.wd || '联系站长哈！！',
@@ -42,11 +43,13 @@ function homeSearchBaidu(fn, params) {
 function homeArticle(fn, params) {
     var type = params.type || 'github';
     params = params.type == 'github' ? params : {};
-    superagent.get(hotURL[type])
-        .query(params)
+    superagent.post(hotURL[type])
+        .send(params)
         .charset() //指定编码或者为空，为空为自动模式
         .end(function(err, res) {
-            fn(eval(res.text), res.ok, '接口响应错误');
+            var Data = typeof(res.text) == 'string' ? JSON.parse(res.text) : res.text;
+            Data = Data.data || Data;
+            fn(Data, res.ok, '接口响应错误');
         })
 };
 module.exports = {

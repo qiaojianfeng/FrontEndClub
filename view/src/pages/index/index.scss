@@ -50,6 +50,10 @@
 
 //热门
 .hot {
+    .spin {
+        height: 200px;
+        position: relative;
+    }
     //menu
     .selectMenu {
         background-color: #fff;
@@ -152,6 +156,10 @@
             box-sizing: border-box;
             a {
                 color: #333;
+                display: block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
                 &:hover {
                     color: #2d8cf0;
                     text-decoration: underline;

@@ -57,7 +57,7 @@ export default {
                 if (res.status) {
                     this.results = res.data;
                 } else {
-                    alert(res.msg);
+                    this.$Message.error('对方不想说话，并且向你抛出了一个异常');
                 }
 
             }, {

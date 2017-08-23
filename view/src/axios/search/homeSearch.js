@@ -12,14 +12,19 @@ import BaseService from '../base'
  * URL09 => MDN
  * URL10 => 简书
  ************************************************/
-const searchURL = {
-    URL01: '/api/hotKeys', //百度
-}
 
+const searchURL = {
+    URL01: {
+        debug: 'http://192.168.1.142:3001/api/hotKeys',
+        online: '/api/hotKeys'
+    }
+
+};
 
 export default {
     getSearchData(type, cb, params) {
-        BaseService.getData(searchURL[type], params).then((res) => {
+        const SEARCH = BaseService.debug ? searchURL[type].debug : searchURL[type].online;
+        BaseService.getData(SEARCH, params).then((res) => {
             cb(res.data || res)
         }).catch((error) => {
             console.log('数据请求失败啦');

@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const port = 3001;
 //路由配置
@@ -9,7 +10,6 @@ const API = require('./Routes/API');
 API.Open(app);
 //注册入口
 Routes.Home(app);
-
 
 
 //设置静态文件
