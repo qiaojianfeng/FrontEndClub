@@ -4,6 +4,7 @@ export default {
     data() {
         return {
             layoutType: 0,
+            spinShow: true,
             value3: 0,
             setting: {
                 height: '300px',
@@ -89,28 +90,28 @@ export default {
             ],
             randomMovieList: [],
             hotLists: [],
-            curHotSite: 'site01',
+            curHotSite: 'github',
             curHotType: 'trending',
             curDateType: 'day',
             curHotLang: 'JavaScript',
             HotSiteLists: [{
-                    value: 'site01',
+                    value: 'github',
                     label: 'GitHub'
                 }, {
-                    value: 'site02',
+                    value: 'qianduan',
                     label: '前端外刊评论'
                 }, {
-                    value: 'site03',
+                    value: 'cnblogs',
                     label: '博客园'
                 }, {
-                    value: 'site04',
+                    value: 'csdn',
                     label: 'CSDN博客'
                 }, {
-                    value: 'site05',
+                    value: 'ithome',
                     label: 'IT之家'
                 },
                 {
-                    value: 'site06',
+                    value: 'solidot',
                     label: '奇客'
                 }
             ],
@@ -154,7 +155,7 @@ export default {
     },
     mounted() {
         this.changeLimit();
-        this.getHotData();
+        this.getHotData('github');
     },
     methods: {
         handleSubmit(name) {
@@ -186,8 +187,10 @@ export default {
             }
             this.randomMovieList = getArrayItems(this.movieList, 6);
         },
-        getHotData() {
+        getHotData(type) {
+            this.spinShow = true;
             let pramas = {
+                "type": type,
                 "category": this.curHotType,
                 "period": this.curDateType,
                 "lang": this.curHotLang,
@@ -195,23 +198,29 @@ export default {
                 "limit": 30
             }
             HttpHot.getHotData(res => {
-                if (res.code == 200) {
+                if (res.status) {
                     this.hotLists = res.data;
+                    this.spinShow = false;
+                } else {
+                    this.$Message.error('对方不想说话，并且向你抛出了一个异常');
                 }
             }, pramas)
         },
         getOtherHot(type) {
-            if (type == 'site01') {
+            if (type == 'github') {
                 this.layoutType = 0;
-                this.getHotData();
+                this.getHotData(type);
             } else {
-                this.layoutType = 1;
+                HttpHot.getHotData(res => {
+                    if (res.status) {
+                        this.hotLists = res.data;
+                        this.layoutType = 1;
+                    } else {
+                        this.$Message.error('对方不想说话，并且向你抛出了一个异常');
+                    }
+                }, { type })
             }
-            HttpHot.getOtherHot(type, res => {
-                if (res.code == 200) {
-                    this.hotLists = res.data;
-                }
-            })
+
         },
         //box顶部随机颜色
         BTColor() {
@@ -219,7 +228,7 @@ export default {
             var c2 = parseInt(Math.random() * 255);
             var c3 = parseInt(Math.random() * 255);
             return 'rgb(' + c1 + ',' + c2 + ',' + c3 + ')';
-        },
+        }
 
     },
     computed: {

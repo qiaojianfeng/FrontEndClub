@@ -2,6 +2,7 @@ import axios from 'axios'
 
 // 添加请求拦截器
 axios.interceptors.request.use(function(config) {
+
     // 在发送请求之前做些什么
     return config;
 }, function(error) {
@@ -28,8 +29,9 @@ const config = {
 };
 
 
-
+var isDev = process.env.NODE_ENV === 'development';
 export default {
+    debug: isDev,
     //请求数据 
     //`params`选项是要随请求一起发送的请求参数----一般链接在URL后面
     //他的类型必须是一个纯对象或者是URLSearchParams对象
@@ -47,7 +49,7 @@ export default {
         return axios({
             method: 'post',
             url: url,
-            data: JSON.stringify(data),
+            data: data,
             ...config
         })
     },

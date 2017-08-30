@@ -54,14 +54,22 @@ export default {
     methods: {
         soCur(type) {
             HttpSearch.getSearchData(type, res => {
-                this.results = res;
+                if (res.status) {
+                    this.results = res.data;
+                } else {
+                    this.$Message.error('对方不想说话，并且向你抛出了一个异常');
+                }
+
             }, {
+                type: 'URL01',
                 wd: this.keys
             })
         },
 
         soTar(key) {
-            window.open(this.searchURL[key].url + this.keys);
+            if (this.keys) {
+                window.open(this.searchURL[key].url + this.keys);
+            }
         },
 
 

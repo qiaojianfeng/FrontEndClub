@@ -96,7 +96,7 @@
                         v-show="!layoutType">
                     <Option v-for="item in HotTypeLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData('github')"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>
@@ -105,7 +105,7 @@
                         v-show="!layoutType">
                     <Option v-for="item in DateTypeLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData('github')"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>
@@ -114,42 +114,46 @@
                         v-show="!layoutType">
                     <Option v-for="item in HotLangLists" 
                             :value="item.value"
-                            @click.native="getHotData"
+                            @click.native="getHotData('github')"
                             :key="item.value">{{ item.label }}
                     </Option>
                 </Select>
-                 
-              
-               
             </div>
-            <ul class="list" v-if="layoutType">
-                <li v-for="item in hotLists">
-                    <h3> <a :href="item.url" target="_blank">{{item.title}}</a></h3>
-                    <p class="date" v-if="item.date.iso">{{item.date.iso.substring(0,10)}}</p>
-                </li>
-            </ul>
-            <ul class="box" v-else>
-                <li v-for="item in hotLists" >
-                    <div class="item" :style="{ 'borderTopColor': BTColor()}">
-                        <a :href="item.url" target="_blank">
-                            <Icon type="social-github"></Icon>
-                            {{item.username}} /<b> {{item.reponame}}</b>
-                        </a>
-                        <p>{{item.description}}</p>
-                        <div class="info">
-                            <span class="lang">{{item.lang}}</span>
-                            <span class="star-count">
-                                <Icon type="android-star"></Icon>
-                                {{item.starCount}}
-                            </span>
-                            <span class="fork-count">
-                                <Icon type="fork-repo"></Icon>
-                                {{item.forkCount}}
-                            </span>
-                        </div>
-                    </div> 
-                </li>
-            </ul>
+            <!--内容-->
+            <div class="spin" v-if="spinShow">
+                <Spin size="large" fix ></Spin>                
+            </div>
+            <div v-else>
+                <ul class="list" v-if="layoutType">
+                    <li v-for="item in hotLists">
+                        <h3> <a :href="item.url" target="_blank">{{item.title}}</a></h3>
+                        <p class="date" v-if="item.date.iso">{{item.date.iso.substring(0,10)}}</p>
+                    </li>
+                </ul>
+                <ul class="box" v-else>
+                    <li v-for="item in hotLists" >
+                        <div class="item" :style="{ 'borderTopColor': BTColor()}">
+                            <a :href="item.url" target="_blank">
+                                <Icon type="social-github"></Icon>
+                                {{item.username}} /<b> {{item.reponame}}</b>
+                            </a>
+                            <p>{{item.description}}</p>
+                            <div class="info">
+                                <span class="lang">{{item.lang}}</span>
+                                <span class="star-count">
+                                    <Icon type="android-star"></Icon>
+                                    {{item.starCount}}
+                                </span>
+                                <span class="fork-count">
+                                    <Icon type="fork-repo"></Icon>
+                                    {{item.forkCount}}
+                                </span>
+                            </div>
+                        </div> 
+                    </li>
+                </ul>
+            </div>
+            
             
        </div>
     

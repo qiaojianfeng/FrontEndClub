@@ -1,0 +1,65 @@
+.layout {
+    border: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 100%;
+    .ivu-row-flex {
+        height: 100%;
+        .layout-menu-left {
+            background: #464c5b;
+            .layout-logo-left {
+                width: 90%;
+                height: 50px;
+                line-height: 50px;
+                border-radius: 3px;
+                margin: 15px auto;
+                color: #fff;
+                font-weight: 800;
+                text-align: center;
+                background-color: rgba(48, 52, 63, .6);
+                box-shadow: 2px 2px 3px rgba(0, 0, 0, .3);
+                cursor: pointer;
+                user-select: none;
+            }
+            .layout-ceiling-main a {
+                color: #9ba7b5;
+            }
+            .layout-hide-text .layout-text {
+                display: none;
+            }
+        }
+        .ivu-col {
+            position: relative;
+            transition: width .2s ease-in-out;
+            .layout-breadcrumb {
+                padding: 10px 15px 0;
+            }
+            .layout-header {
+                height: 60px;
+                background: #fff;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+            }
+            .layout-content {
+                min-height: 200px;
+                margin: 15px;
+                overflow: hidden;
+                background: #fff;
+                border-radius: 4px;
+                .layout-content-main {
+                    padding: 10px;
+                }
+            }
+            .layout-copy {
+                position: absolute;
+                width: 100%;
+                left: 0;
+                bottom: 0;
+                text-align: center;
+                padding: 10px 0 20px;
+                color: #9ea7b4;
+            }
+        }
+    }
+}
